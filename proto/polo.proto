@@ -1,0 +1,15 @@
+
+syntax = "proto3";
+package pholo;
+option go_package = "github.com/NishanthSpShetty/pholo/proto";
+
+service Pholo {
+  rpc Echo(EchoMessage) returns (EchoMessage) {}
+  rpc Ping(PingRequest) returns (PingResponse) {}
+  rpc Healthz(HealthZ) returns (HealthZ) {}
+}
+
+message EchoMessage { string message = 1; }
+message PingResponse { string message = 1; }
+message PingRequest {}
+message HealthZ {}
