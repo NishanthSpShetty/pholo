@@ -17,18 +17,22 @@ type server struct {
 }
 
 // Echo implements proto.PholoServer
-func (*server) Echo(context.Context, *proto.EchoMessage) (*proto.EchoMessage, error) {
-	panic("unimplemented")
+func (*server) Echo(ctx context.Context, req *proto.EchoMessage) (*proto.EchoMessage, error) {
+	return &proto.EchoMessage{
+		Message: req.GetMessage(),
+	}, nil
 }
 
 // Healthz implements proto.PholoServer
 func (*server) Healthz(context.Context, *proto.HealthZ) (*proto.HealthZ, error) {
-	panic("unimplemented")
+	return &proto.HealthZ{}, nil
 }
 
 // Ping implements proto.PholoServer
 func (*server) Ping(context.Context, *proto.PingRequest) (*proto.PingResponse, error) {
-	panic("unimplemented")
+	return &proto.PingResponse{
+		Message: "pong",
+	}, nil
 }
 
 func startGRPC(addr string) error {
@@ -52,5 +56,4 @@ func main() {
 		log.Error().Err(err)
 		return
 	}
-
 }
